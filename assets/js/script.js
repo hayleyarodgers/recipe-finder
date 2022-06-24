@@ -6,8 +6,20 @@ var searchQuery; // search query for youtube. will be concatenated to searchResu
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; // search results through google api
 var player;
 var videoRecipe = document.getElementById('') // loads video to the element
-var videoID = searchResults.videoId; // grabs video id to load a video for each recipe
-var recipeURL = "https://www.youtube.com/watch?v=" + videoID; // links recipe for video. 
+var videoID; // grabs video id to load a video for each recipe
+var recipeURL; // links recipe for video. 
+
+// fetch request to obtain the response from the youtube api
+fetch(searchResults).then(function (response) {
+    return response.json()
+}).then(function (data) {
+    console.log(data);
+    videoID = data.items[0].id.videoId;
+    console.log(videoID);
+    recipeURL = "https://www.youtube.com/watch?v=" + videoID;
+    console.log(recipeURL);
+})
+
 // this function loads the iframe api to view YT videos
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
