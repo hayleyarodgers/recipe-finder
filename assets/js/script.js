@@ -1,4 +1,26 @@
-// Spoonacular Api Call - fetchs results
+/* JS DIRECTORY
+   1. =VARIABLES
+   2. =SEARCH
+   3. =DISPLAY-RESULTS
+   4. =DISPLAY-VIDEO
+   5. =STORAGE
+*/
+
+/* ===VARIABLES=== */
+// (consolidate our variables and fill this in once all of our functions are done)
+
+// Section element variables 
+
+
+// Video-related variables
+
+
+// ...
+
+
+/* ===SEARCH=== */
+
+// Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
 var getRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=39791063581a4d96a908bb19745b3f64'
 fetch(getRecipe).then((data)=>{
@@ -27,3 +49,14 @@ function fn1()
    });
 };
 
+/* ===DISPLAY-RESULTS=== */
+
+
+
+
+/* ===DISPLAY-VIDEO=== */
+
+
+
+
+/* ===STORAGE=== */
