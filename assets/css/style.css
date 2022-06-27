@@ -101,22 +101,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-/* This is the fun fact button */
-.button {
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-  background-color: var(--green);
-  padding: 0.5em 1.25em;
-  border-radius: 0.25em;
-}
-.button:hover,
-.button:focus {
-  background-color: var(--white);
-  color: black;
-}
 /* h2 heading styles */
 h2 {
   text-align: center;
@@ -129,74 +113,61 @@ h3 {
 p {
   text-align: center;
 }
-/* this is the recipe section */
-.recipe-container {
-  position: relative;
-  display: center;
+/* content wrap */
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 25px;
+  gap: 1rem;
+}
+/* enter ingredients and previous recipes wrap */
+.left-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px 100px;
+  gap: 1rem;
 }
-.recipe-container:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* results Wrap */
+.right-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-content: center;
+  gap: 1rem;
 }
+/* this is the "enter your ingredients box */
 .recipe-box {
-  max-width: 400px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0px 0px 19px 5px #b1b1b1;
-}
-.previous-recipe-container {
   position: relative;
-  display: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px 100px;
-}
-.previous-recipe-container:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-.previous-recipe-box {
-  max-width: 400px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
+  grid-template-columns: repeat(1), minmax(225px, 1fr);
   align-items: center;
   text-align: center;
+  padding: 25px;
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
-.left {
-  height: 100%;
-  background: url("../images/ingredient-image.jpeg");
-  background-size: cover;
-}
-.right {
-  padding: 25px 40px;
+.recipe-box__image {
+  display: block;
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  margin: 25px 0px 25px 0px;
 }
 /* ingredient entry fields */
-.field {
-  width: 100%;
+.recipe-box__field {
+  width: 80%;
   padding: 0.5rem 1rem;
   outline: none;
   border: 2px solid white;
@@ -206,7 +177,7 @@ p {
   transition: 0.3s;
 }
 /* adjusts colour of ingredient entry box when hovering */
-.field:hover {
+.recipe-box__field:hover {
   background-color: #b1b1b1;
 }
 /* recipe entry focus adjusts the box colour when clicked */
@@ -216,26 +187,90 @@ p {
 }
 /* recipe search button */
 .btn {
-  width: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 80%;
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   font-weight: bold;
   background-color: #014923;
   cursor: pointer;
   outline: none;
+  margin: auto 0px 25px;
   border: none;
   color: #fff;
   transition: 0.3s;
 }
 .btn:hover {
   background-color: green;
+  color: #fff;
 }
-/* contact grid class space */
-.recipe-box {
-  grid-template-columns: 1fr;
+.recipe-history {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px 0px 25px 0px;
+  padding: 25px;
+  background-color: #fff;
+  box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
-.left {
-  height: 200px;
+.recipe-history__container:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.recipe-history__list-group-item {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  height: 10px;
+  border: #b1b1b1;
+  border-width: 1px;
+  border-style: solid;
+  margin: 25px;
+  padding: 25px;
+  transition: all 0.4s ease-out;
+}
+.recipe-history__list-group-item:hover {
+  cursor: pointer;
+  background-color: #b1b1b1;
+  transition: all 0.4s ease-out;
+}
+/* results card */
+.results-card {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  width: fit-content;
+  height: fit-content;
+  padding: 25px;
+  background-color: #fff;
+  box-shadow: 0px 0px 19px 5px #b1b1b1;
+}
+/* results card */
+.recipe-info {
+  display: flex;
+  gap: 2rem;
+  width: fit-content;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 1;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: flex-start;
+  align-items: center;
+  align-content: center;
+  margin: 25px;
+  padding: 25px;
+  background-color: #fff;
+  box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
 /* this is all the css for the footer */
 .footer-container {
