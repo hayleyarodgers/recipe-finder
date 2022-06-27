@@ -9,13 +9,8 @@
 /* ===VARIABLES=== */
 // (consolidate our variables and fill this in once all of our functions are done)
 
-// Section element variables 
-
-
-// Video-related variables
-
-
-// ...
+// Recipe selected by user in spoonacular search result list
+var selectedRecipe;
 
 
 /* ===SEARCH=== */
@@ -60,3 +55,19 @@ function fn1()
 
 
 /* ===STORAGE=== */
+
+// Save recipe in local storage
+
+function saveRecipe() {
+   var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+
+   if (savedRecipes === null) {
+      savedRecipes = [selectedRecipe];
+   } else {
+      savedRecipes.push(selectedRecipe);
+   }
+
+   localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+   showRecipeHistory();
+}
+
