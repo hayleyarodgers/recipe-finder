@@ -30,7 +30,9 @@ header::after {
 /* logo location and color */
 .logo {
   float: left;
+  margin: 25px;
   color: var(--white);
+  font-weight: bolder;
 }
 /* top navigation */
 .nav-container {
@@ -64,7 +66,7 @@ nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 16px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 /* nav bar hover effect color */
 nav ul li a:hover {
