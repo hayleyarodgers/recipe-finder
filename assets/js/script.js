@@ -87,3 +87,8 @@ function showRecipeHistory() {
        }
    }
 }
+
+// When page loads, load search history (unsure if we want anything else here?)
+window.onload = function() {
+   showRecipeHistory();
+}
