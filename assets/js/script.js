@@ -11,6 +11,7 @@
 
 // Recipe selected by user in spoonacular search result list
 var selectedRecipe;
+var recipeHistoryEl = document.getElementById('recipe-history');
 
 
 /* ===SEARCH=== */
@@ -57,7 +58,6 @@ function fn1()
 /* ===STORAGE=== */
 
 // Save recipe in local storage
-
 function saveRecipe() {
    var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
 
@@ -71,3 +71,19 @@ function saveRecipe() {
    showRecipeHistory();
 }
 
+// Display recipe in search history
+function showRecipeHistory() {
+   recipeHistoryEl.innerHTML = '';
+    
+   var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+   
+   if (savedRecipes !== null) {
+       for (var i = 0; i < savedRecipes.length; i++) {
+           var recipe = savedRecipes[i];
+           var li = document.createElement("li");
+           li.classList = 'btn recipe-history__list-group-item';
+           li.textContent = recipe;
+           recipeHistoryEl.appendChild(li);
+       }
+   }
+}
