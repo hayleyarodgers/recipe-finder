@@ -1,5 +1,3 @@
-// JavaScript
-// Spoonacular Api Call - fetchs results
 /* JS DIRECTORY
    1. =VARIABLES
    2. =SEARCH
@@ -35,7 +33,6 @@ function fn1(e)
    console.log (allIngreds);
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
- 
  
    fetch(newRecipe)
       .then(response => {
