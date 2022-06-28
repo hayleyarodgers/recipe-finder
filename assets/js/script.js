@@ -1,5 +1,3 @@
-// JavaScript
-// Spoonacular Api Call - fetchs results
 /* JS DIRECTORY
    1. =VARIABLES
    2. =SEARCH
@@ -23,8 +21,9 @@ var recipeHistoryEl = document.getElementById('recipe-history');
 var newSearch = document.getElementById('searchBtn');
 newSearch.addEventListener("click", fn1);
 
-// Fetch list of recipe names from Spoonacular API based on ingredient inputs
+//Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
+<<<<<<< HEAD
 function fn1(e) {
 
 
@@ -32,9 +31,18 @@ function fn1(e) {
     var ingred2 = document.getElementById('form2').value;
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+=======
+function fn1(e)
+{
+   var ingred = document.getElementById('form1').value;
+   var ingred2 = document.getElementById('form2').value;
+   var ingred3 = document.getElementById('form3').value;
+   var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+>>>>>>> 7a79a776aa411c08a4edb5b7e50c1486719924d8
 
     console.log(allIngreds);
 
+<<<<<<< HEAD
     var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
 
 
@@ -53,6 +61,25 @@ function fn1(e) {
             console.log(error)
         });
 
+=======
+   var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+
+   fetch(newRecipe)
+      .then(response => {
+         if (!response.ok){
+            throw Error("ERROR")
+         };
+         return response.json();
+   })
+   .then(data => {
+      console.log(data);
+   });
+
+   var inputs = document.querySelectorAll('#form1, #form2, #form3')
+   inputs.forEach(input => {
+      input.value = '';
+   });
+>>>>>>> 7a79a776aa411c08a4edb5b7e50c1486719924d8
 
 
     var inputs = document.querySelectorAll('#form1, #form2, #form3')
@@ -63,9 +90,19 @@ function fn1(e) {
     e.preventDefault();
 
 
+<<<<<<< HEAD
 };
 var newRecipe
 // video fetching code
+=======
+
+/* ===DISPLAY-RESULTS=== */
+
+
+/* ===DISPLAY-VIDEO=== */
+
+// Video fetching code
+>>>>>>> 7a79a776aa411c08a4edb5b7e50c1486719924d8
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; // search results through google api
@@ -73,7 +110,7 @@ var videoRecipe = document.getElementById('') // loads video to the element
 var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
 
-// fetch request to obtain the response from the youtube api
+// Fetch request to obtain the response from the youtube api
 fetch(searchResults).then(function (response) {
     return response.json()
 }).then(function (data) {
