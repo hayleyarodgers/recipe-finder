@@ -34,24 +34,18 @@
         <nav>
           <ul>
             <!-- nav uses ID's to take the user to that section of the page -->
-            <li><a href="#recipe-finder">Recipe Finder</a></li>
-            <li><a href="#recipe-history">Previous Recipes</a></li>
+            <li><a href="/index.html#recipe-finder">Recipe Finder</a></li>
+            <li><a href="/index.html#recipe-history">Previous Recipes</a></li>
           </ul>
         </nav>
       </div>
     </header>
-    <section class="card card-rounded px-0 col-7 bg-white mx-auto">
-      <header class="card-header text-center">
-        <!--Insert error response status into this span-->
-        <h2>Error: <span id="error-code">404</span></h2>
-      </header>
-      <p class="p-3">
+    <section class="jumbotron">
+      <h1 class="display-4">Error: 404</h1>
+      <p class="lead">
         Oh no! We're sorry we couldn't find the page you're looking for.
       </p>
-      <footer class="card-footer text-center">
-        <!--Set event listener on this back button to change document to index.html-->
-        <button id="back-button" class="btn">Back</button>
-      </footer>
+      <a class="btn" href="./index.html" role="btn">Back</a>
     </section>
     <!-- footer of the site -->
     <footer>
