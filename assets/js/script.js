@@ -65,7 +65,6 @@ function fn1(e) {
 
 };
 
-<<<<<<< HEAD
 // video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
@@ -124,9 +123,6 @@ function onPlayerStateChange(event) {
 function stopVideo() {
     player.stopVideo();
 }
-=======
-
->>>>>>> 014caa1a9440769bf68d2f7594c93660a244d898
 /* ===DISPLAY-RESULTS=== */
 
 // function fetchResults() {
@@ -180,3 +176,7 @@ function showRecipeHistory() {
 window.onload = function () {
     showRecipeHistory();
 }
+// clear recipe history
+document.getElementById('clearButton').addEventListener("click", function () {
+    localStorage.clear();
+})
