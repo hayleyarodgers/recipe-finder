@@ -16,17 +16,17 @@ var recipeHistoryEl = document.getElementById('recipe-history');
 
 /* ===SEARCH=== */
 
+//Event listener that runs search function on click
+
+var newSearch = document.getElementById('searchBtn');
+newSearch.addEventListener("click",fn1);
+
 // Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
-var getRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=39791063581a4d96a908bb19745b3f64'
-fetch(getRecipe).then((data)=>{
-   console.log(data);
-});
-
-
-
-function fn1()
+function fn1(e)
 {
+
+
    var ingred = document.getElementById('form1').value;
    var ingred2 = document.getElementById('form2').value;
    var ingred3 = document.getElementById('form3').value;
@@ -36,18 +36,44 @@ function fn1()
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
  
-   console.log(newRecipe);
+ 
+   fetch(newRecipe)
+      .then(response => {
+         if (!response.ok){
+            throw Error("ERROR")
+         };
+         return response.json();
+   })
+   .then(data => {
+      console.log(data);
+
+      document.querySelector('#result1').innerHTML;
+   }).catch(error =>{
+      console.log(error)
+   });
+
+
 
    var inputs = document.querySelectorAll('#form1, #form2, #form3')
-
    inputs.forEach(input => {
       input.value = '';
    });
+
+   e.preventDefault();
+
+ 
 };
+
 
 /* ===DISPLAY-RESULTS=== */
 
+// function fetchResults() {
+//    fetch(newRecipe).then(response => {
+//       console.log(response);
+//    });
+// }
 
+//fetchResults();
 
 
 /* ===DISPLAY-VIDEO=== */
