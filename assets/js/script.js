@@ -23,7 +23,7 @@ var newRecipe;
 var newSearch = document.getElementById('searchBtn');
 newSearch.addEventListener("click",fn1);
 
-// Fetch list of recipe names from Spoonacular API based on ingredient inputs
+//Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
 function fn1(e) {
    var ingred = document.getElementById('form1').value;
@@ -35,7 +35,6 @@ function fn1(e) {
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
  
- 
    fetch(newRecipe)
       .then(response => {
          if (!response.ok){
@@ -45,13 +44,7 @@ function fn1(e) {
    })
    .then(data => {
       console.log(data);
-
-      document.querySelector('#result1').innerHTML;
-   }).catch(error =>{
-      console.log(error)
    });
-
-
 
    var inputs = document.querySelectorAll('#form1, #form2, #form3')
    inputs.forEach(input => {
