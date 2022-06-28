@@ -1,9 +1,9 @@
 /* JS DIRECTORY
-   1. =VARIABLES
-   2. =SEARCH
-   3. =DISPLAY-RESULTS
-   4. =DISPLAY-VIDEO
-   5. =STORAGE
+    1. =VARIABLES
+    2. =SEARCH
+    3. =DISPLAY-RESULTS
+    4. =DISPLAY-VIDEO
+    5. =STORAGE
 */
 
 /* ===VARIABLES=== */
@@ -25,34 +25,34 @@ newSearch.addEventListener("click",fn1);
 
 function fn1(e)
 {
-   var ingred = document.getElementById('form1').value;
-   var ingred2 = document.getElementById('form2').value;
-   var ingred3 = document.getElementById('form3').value;
-   var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+    var ingred = document.getElementById('form1').value;
+    var ingred2 = document.getElementById('form2').value;
+    var ingred3 = document.getElementById('form3').value;
+    var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-   console.log (allIngreds);
+    console.log (allIngreds);
 
-   var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
- 
-   fetch(newRecipe)
-      .then(response => {
-         if (!response.ok){
-            throw Error("ERROR")
-         };
-         return response.json();
-   })
-   .then(data => {
-      console.log(data);
-   });
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+    
+    fetch(newRecipe)
+        .then(response => {
+            if (!response.ok){
+                throw Error("ERROR")
+            };
+            return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    });
 
-   var inputs = document.querySelectorAll('#form1, #form2, #form3')
-   inputs.forEach(input => {
-      input.value = '';
-   });
+    var inputs = document.querySelectorAll('#form1, #form2, #form3')
+    inputs.forEach(input => {
+        input.value = '';
+    });
 
-   e.preventDefault();
+    e.preventDefault();
 
- 
+    
 };
 
 
@@ -124,37 +124,51 @@ player.stopVideo();
 /* ===STORAGE=== */
 
 // Save recipe in local storage
+// should also save youtube link
+var savedData;
 function saveRecipe() {
-   var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    // put the recipe and video link into an object
+    savedData = {
+        recipe: savedRecipes,
+        video: recipeURL
+    }
 
-   if (savedRecipes === null) {
-      savedRecipes = [selectedRecipe];
-   } else {
-      savedRecipes.push(selectedRecipe);
-   }
+    if (savedRecipes === null) {
+        savedRecipes = [selectedRecipe];
+    } else {
+        savedRecipes.push(selectedRecipe);
+    }
 
-   localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
-   showRecipeHistory();
+    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+    showRecipeHistory();
 }
 
 // Display recipe in search history
 function showRecipeHistory() {
-   recipeHistoryEl.innerHTML = '';
+    recipeHistoryEl.innerHTML = '';
+        
+    var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     
-   var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-   
-   if (savedRecipes !== null) {
-       for (var i = 0; i < savedRecipes.length; i++) {
-           var recipe = savedRecipes[i];
-           var li = document.createElement("li");
-           li.classList = 'btn recipe-history__list-group-item';
-           li.textContent = recipe;
-           recipeHistoryEl.appendChild(li);
-       }
-   }
+    if (savedRecipes !== null) {
+        for (var i = 0; i < savedRecipes.length; i++) {
+            var recipe = savedRecipes[i];
+            var li = document.createElement("li");
+            li.classList = 'btn recipe-history__list-group-item';
+            li.textContent = recipe;
+            recipeHistoryEl.appendChild(li);
+        }
+    }
+
+    // link to video when clicking on recipe history
+    var recipeCard = document.getElementById('recipe-card');
+    recipeCard.addEventListener('click', function() {
+        var oldVideo = savedData.video;
+        window.open(oldVideo, '_blank').focus();
+    })
 }
 
 // When page loads, load search history (unsure if we want anything else here?)
 window.onload = function() {
-   showRecipeHistory();
+    showRecipeHistory();
 }
