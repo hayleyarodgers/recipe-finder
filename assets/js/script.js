@@ -12,19 +12,20 @@
 // Recipe selected by user in spoonacular search result list
 var selectedRecipe;
 var recipeHistoryEl = document.getElementById('recipe-history');
+var recipeSearchResultsEl = document.getElementById('recipe-search-results');
 
+var newRecipe;
 
 /* ===SEARCH=== */
 
-//Event listener that runs search function on click
+// Event listener that runs search function on click
 
 var newSearch = document.getElementById('searchBtn');
 newSearch.addEventListener("click",fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
-function fn1(e)
-{
+function fn1(e) {
    var ingred = document.getElementById('form1').value;
    var ingred2 = document.getElementById('form2').value;
    var ingred3 = document.getElementById('form3').value;
@@ -55,38 +56,56 @@ function fn1(e)
  
 };
 
-
 /* ===DISPLAY-RESULTS=== */
+// Use for loop to display search results from spoonacular on page
+
+
+// When a search result is clicked, load a youtube video tutorial
+recipeSearchResultsEl.addEventListener('click', function(event) {
+   // Unsure if .textContent is the best option, perhaps .innerHTML or .value ... will need to test after first display result function is written.
+   selectedRecipe = event.target.textContent;
+   makeSearchResultURL(selectedRecipe);
+})
 
 
 /* ===DISPLAY-VIDEO=== */
 
-// Video fetching code
+// video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
-var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; // search results through google api
-var videoRecipe = document.getElementById('') // loads video to the element
-var videoID; // grabs video id to load a video for each recipe
-var recipeURL; // links recipe for video. 
 
-// Fetch request to obtain the response from the youtube api
-fetch(searchResults).then(function (response) {
-    return response.json()
-}).then(function (data) {
-    console.log(data);
-    // checks if videoId is undefined, in the case that the first result is not a video
-    for (var i = 0; i <= data.items.length; i++) {
-        if(data.items[i].id.videoId === undefined) {
-            continue;
-        } else {
-            videoID = data.items[i].id.videoId;
-            break;
-        }
-    }
-    console.log(videoID);
-    recipeURL = "https://www.youtube.com/watch?v=" + videoID
-    console.log(recipeURL);
-})
+function makeSearchResultURL(selectedRecipe) {
+   var searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+   var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; 
+   getYoutubeVideo(searchResults);
+}
+
+function getYoutubeVideo() {
+   // search results through google api
+   var videoRecipe = document.getElementById('') // loads video to the element
+   var videoID; // grabs video id to load a video for each recipe
+   var recipeURL; // links recipe for video. 
+
+   // fetch request to obtain the response from the youtube api
+
+   fetch(searchResults).then(function (response) {
+      return response.json()
+   }).then(function (data) {
+      console.log(data);
+      // checks if videoId is undefined, in the case that the first result is not a video
+      for (var i = 0; i <= data.items.length; i++) {
+         if(data.items[i].id.videoId === undefined) {
+               continue;
+         } else {
+               videoID = data.items[i].id.videoId;
+               break;
+         }
+      }
+      console.log(videoID);
+      recipeURL = "https://www.youtube.com/watch?v=" + videoID
+      console.log(recipeURL);
+   })
+}
+
 
 // this function loads the iframe api to view YT videos
 // check if below functions are needed...
