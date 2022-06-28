@@ -64,7 +64,7 @@ function fn1(e) {
 
 
 };
-
+var newRecipe
 // video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
@@ -177,7 +177,10 @@ window.onload = function () {
     showRecipeHistory();
 }
 // clear recipe history
-document.getElementById('clearBtn').addEventListener("click", function () {
+var clearBtn = document.getElementById('clearBtn');
+console.log(clearBtn);
+clearBtn.addEventListener("click", function () {
     localStorage.clear();
     console.log('clearBtn')
+    recipeHistoryEl.innerHTML = '';
 })
