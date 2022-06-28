@@ -1,8 +1,36 @@
 // JavaScript
+// Spoonacular Api Call - fetchs results
+
+var getRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=39791063581a4d96a908bb19745b3f64'
+fetch(getRecipe).then((data)=>{
+   console.log(data);
+});
+
+
+
+function fn1()
+{
+   var ingred = document.getElementById('form1').value;
+   var ingred2 = document.getElementById('form2').value;
+   var ingred3 = document.getElementById('form3').value;
+   var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+
+   console.log (allIngreds);
+
+   var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+ 
+   console.log(newRecipe);
+
+   var inputs = document.querySelectorAll('#form1, #form2, #form3')
+
+   inputs.forEach(input => {
+      input.value = '';
+   });
+};
 
 // video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
-var searchQuery; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; // search results through google api
 var videoRecipe = document.getElementById('') // loads video to the element
 var videoID; // grabs video id to load a video for each recipe
@@ -58,32 +86,3 @@ if (event.data == YT.PlayerState.PLAYING && !done) {
 function stopVideo() {
 player.stopVideo();
 }
-// Spoonacular Api Call - fetchs results
-
-var getRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=39791063581a4d96a908bb19745b3f64'
-fetch(getRecipe).then((data)=>{
-   console.log(data);
-});
-
-
-
-function fn1()
-{
-   var ingred = document.getElementById('form1').value;
-   var ingred2 = document.getElementById('form2').value;
-   var ingred3 = document.getElementById('form3').value;
-   var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
-
-   console.log (allIngreds);
-
-   var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
- 
-   console.log(newRecipe);
-
-   var inputs = document.querySelectorAll('#form1, #form2, #form3')
-
-   inputs.forEach(input => {
-      input.value = '';
-   });
-};
-
