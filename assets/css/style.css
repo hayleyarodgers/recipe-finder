@@ -286,7 +286,7 @@ p {
   margin: 25px 0px 25px 0px;
 }
 /* results card */
-.recipe-info {
+#recipe-info {
   display: flex;
   gap: 2rem;
   width: fit-content;
