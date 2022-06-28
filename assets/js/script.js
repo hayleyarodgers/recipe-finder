@@ -177,6 +177,7 @@ window.onload = function () {
     showRecipeHistory();
 }
 // clear recipe history
-document.getElementById('clearButton').addEventListener("click", function () {
+document.getElementById('clearBtn').addEventListener("click", function () {
     localStorage.clear();
+    console.log('clearBtn')
 })
