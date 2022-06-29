@@ -37,7 +37,8 @@ function fn1(e) {
  
    fetch(newRecipe)
       .then(response => {
-         if (!response.ok){
+         if (response.status !== 200){
+            window.location.href = "./statusError.html";
             throw Error("ERROR")
          };
          return response.json();
