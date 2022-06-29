@@ -9,7 +9,7 @@
 /* ===VARIABLES=== */
 // (consolidate our variables and fill this in once all of our functions are done)
 
-// Recipe selected by user in spoonacular search result list
+var recipeSearchResultsEl = document.getElementById('search-results');
 var selectedRecipe;
 var recipeHistoryEl = document.getElementById('recipe-history');
 
@@ -23,14 +23,11 @@ newSearch.addEventListener("click",fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
 
-function fn1(e)
-{
+function fn1(e) {
    var ingred = document.getElementById('form1').value;
    var ingred2 = document.getElementById('form2').value;
    var ingred3 = document.getElementById('form3').value;
    var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
-
-   console.log (allIngreds);
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
  
@@ -42,7 +39,7 @@ function fn1(e)
          return response.json();
    })
    .then(data => {
-      console.log(data);
+      showSearchResults(data);
    });
 
    var inputs = document.querySelectorAll('#form1, #form2, #form3')
@@ -58,6 +55,27 @@ function fn1(e)
 
 /* ===DISPLAY-RESULTS=== */
 
+// After data fetched from spoonacular API, show top ten search results
+function showSearchResults(data) {
+   for (var i = 0; i < data.length; i++) {
+      var recipe = data[i].title;
+      var recipeImage = data[i].image;
+      var li = document.createElement('li');
+
+      li.innerHTML = `
+         <div class="card mb-3 searchResult">
+            <div class="row no-gutters">
+               <img src="` + recipeImage + `" class="card-img col-md-4" alt="Photo of recipe">
+               <div class="card-body col-md-8 pl-4 my-auto">
+                  <h2 class="card-title">` + recipe + `</h2>
+               </div>
+            </div>
+         </div>
+      `;
+
+      recipeSearchResultsEl.appendChild(li);
+   }
+}
 
 /* ===DISPLAY-VIDEO=== */
 
