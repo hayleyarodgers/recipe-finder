@@ -54,15 +54,6 @@ function fn1(e) {
 };
 
 /* ===DISPLAY-RESULTS=== */
-// Use for loop to display search results from spoonacular on page
-
-
-// When a search result is clicked, load a youtube video tutorial
-recipeSearchResultsEl.addEventListener('click', function(event) {
-   // Unsure if .textContent is the best option, perhaps .innerHTML or .value ... will need to test after first display result function is written.
-   selectedRecipe = event.target.textContent;
-   makeSearchResultURL(selectedRecipe);
-})
 
 // After data fetched from spoonacular API, show top ten search results
 function showSearchResults(data) {
@@ -85,6 +76,12 @@ function showSearchResults(data) {
       recipeSearchResultsEl.appendChild(li);
    }
 }
+
+// When a search result is clicked, load a youtube video tutorial
+recipeSearchResultsEl.addEventListener('click', function(event) {
+   selectedRecipe = event.target.textContent;
+   makeSearchResultURL(selectedRecipe);
+})
 
 /* ===DISPLAY-VIDEO=== */
 
