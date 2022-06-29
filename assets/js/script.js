@@ -12,7 +12,6 @@
 var recipeSearchResultsEl = document.getElementById('search-results');
 var selectedRecipe;
 var recipeHistoryEl = document.getElementById('recipe-history');
-var recipeSearchResultsEl = document.getElementById('recipe-search-results');
 
 var newRecipe;
 
