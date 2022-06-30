@@ -7,11 +7,17 @@
 */
 
 /* ===VARIABLES=== */
+
 // (consolidate our variables and fill this in once all of our functions are done)
+
 
 var recipeSearchResultsEl = document.getElementById('search-results');
 var selectedRecipe;
-var recipeHistoryEl = document.getElementById('recipe-history');
+var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
+var recipeHistoryListEl = document.getElementById('recipe-history-list');
+
+var clearBtn = document.getElementById('clearBtn');
+var youtubeTutorialEl = document.getElementById('youtube-tutorial');
 
 var newRecipe;
 
@@ -57,6 +63,8 @@ function fn1(e) {
 
 // After data fetched from spoonacular API, show top ten search results
 function showSearchResults(data) {
+    recipeSearchResultsEl.style.display = "block";
+
     for (var i = 0; i < data.length; i++) {
         var recipe = data[i].title;
         var recipeImage = data[i].image;
@@ -90,6 +98,9 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 
 function makeSearchResultURL(selectedRecipe) {
+    recipeSearchResultsEl.style.display = "none";
+    youtubeTutorialEl.style.display = "block";
+    
     var searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0';
     getYoutubeVideo(searchResults);
@@ -174,30 +185,35 @@ function saveRecipe() {
 
 // Display recipe in search history
 function showRecipeHistory() {
-    recipeHistoryEl.innerHTML = '';
+    recipeHistoryListEl.innerHTML = '';
 
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
 
     if (savedRecipes !== null) {
+        recipeHistoryContainerEl.style.display = "block";
+        
         for (var i = 0; i < savedRecipes.length; i++) {
             var recipe = savedRecipes[i];
             var li = document.createElement("li");
             li.classList = 'btn recipe-history__list-group-item';
             li.textContent = recipe;
-            recipeHistoryEl.appendChild(li);
+            recipeHistoryListEl.appendChild(li);
         }
+    } else {
+        recipeHistoryContainerEl.style.display = "none";
     }
 }
 
 // When page loads, load search history (unsure if we want anything else here?)
 window.onload = function () {
     showRecipeHistory();
+    recipeSearchResultsEl.style.display = "none";
+    youtubeTutorialEl.style.display = "none";
+
 }
+
 // clear recipe history
-var clearBtn = document.getElementById('clearBtn');
-console.log(clearBtn);
 clearBtn.addEventListener("click", function () {
     localStorage.clear();
-    console.log('clearBtn')
-    recipeHistoryEl.innerHTML = '';
+    recipeHistoryListEl.innerHTML = '';
 })

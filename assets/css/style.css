@@ -216,7 +216,7 @@ p {
   color: #fff;
 }
 /* recipe history card */
-.recipe-history {
+#recipe-history-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -226,7 +226,7 @@ p {
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
-.recipe-history__container:after {
+#recipe-history-container__container:after {
   content: "";
   position: absolute;
   left: 0;
