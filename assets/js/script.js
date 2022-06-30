@@ -22,7 +22,7 @@ var newSearch = document.getElementById('searchBtn');
 newSearch.addEventListener("click",fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
-
+saveRecipe(); // for testing
 function fn1(e)
 {
     var ingred = document.getElementById('form1').value;
@@ -63,7 +63,7 @@ function fn1(e)
 
 // Video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
-var searchQuery = newRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+var searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; // search results through google api
 var videoRecipe = document.getElementById('') // loads video to the element
 var videoID; // grabs video id to load a video for each recipe
@@ -126,14 +126,27 @@ player.stopVideo();
 // Save recipe in local storage
 // should also save youtube link
 var savedData;
+var savedVideos;
+var videoList;
 function saveRecipe() {
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    //var savedVideo = recipeURL;
+    videoList = [];
+    // test links
+    videoList[0] = "https://www.youtube.com/watch?v=Zae7hxSD3a8";
+    videoList[1] = "https://www.youtube.com/watch?v=0KB-5JDf1Y8";
+    videoList[2] = "https://www.youtube.com/watch?v=yslkYSjAPh4";
     // put the recipe and video link into an object
-    savedData = {
-        recipe: savedRecipes,
-        video: recipeURL
-    }
+    // savedData = {
+    //     dataOne: {
+    //         recipe: savedRecipes,
+    //         video: savedVideos
+    //     },
+    //     dataTwo: {
 
+    //     }
+    // }
+    //console.log(savedData.video);
     if (savedRecipes === null) {
         savedRecipes = [selectedRecipe];
     } else {
@@ -141,12 +154,15 @@ function saveRecipe() {
     }
 
     localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+    localStorage.setItem("savedVideos", savedVideos);
     showRecipeHistory();
 }
 
+//console.log(savedVideo);
+
 // Display recipe in search history
 function showRecipeHistory() {
-    recipeHistoryEl.innerHTML = '';
+    //recipeHistoryEl.innerHTML = '';
         
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     
@@ -157,14 +173,27 @@ function showRecipeHistory() {
             li.classList = 'btn recipe-history__list-group-item';
             li.textContent = recipe;
             recipeHistoryEl.appendChild(li);
+            //recipeURL = videoList[i];
         }
     }
 
     // link to video when clicking on recipe history
-    var recipeCard = document.getElementById('recipe-card');
-    recipeCard.addEventListener('click', function() {
-        var oldVideo = savedData.video;
-        window.open(oldVideo, '_blank').focus();
+    var videoHistory = document.getElementById('video-history-one');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[0];
+        window.open(oldVideo, '_blank').focus;
+    })
+
+    var videoHistory = document.getElementById('video-history-two');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[1];
+        window.open(oldVideo, '_blank').focus;
+    })
+
+    var videoHistory = document.getElementById('video-history-three');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[2];
+        window.open(oldVideo, '_blank').focus;
     })
 }
 
