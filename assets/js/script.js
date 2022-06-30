@@ -84,6 +84,8 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 })
 
 
+/* ===DISPLAY-VIDEO=== */
+
 // video fetching code
 key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 
@@ -152,20 +154,6 @@ function onPlayerStateChange(event) {
 function stopVideo() {
     player.stopVideo();
 }
-/* ===DISPLAY-RESULTS=== */
-
-// function fetchResults() {
-//    fetch(newRecipe).then(response => {
-//       console.log(response);
-//    });
-// }
-
-//fetchResults();
-
-
-/* ===DISPLAY-VIDEO=== */
-
-
 
 
 /* ===STORAGE=== */
