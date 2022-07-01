@@ -23,7 +23,6 @@ var newSearch = document.getElementById('searchBtn');
 newSearch.addEventListener("click",fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
-//saveRecipe(); // for testing
 function fn1(e) {
     var ingred = document.getElementById('form1').value;
     var ingred2 = document.getElementById('form2').value;
@@ -49,8 +48,6 @@ function fn1(e) {
     });
 
     e.preventDefault();
-
-    
 };
 
 /* ===DISPLAY-RESULTS=== */
@@ -79,30 +76,24 @@ function showSearchResults(data) {
 
 // When a search result is clicked, load a youtube video tutorial
 recipeSearchResultsEl.addEventListener('click', function(event) {
-   selectedRecipe = event.target.innerText;
-   makeSearchResultURL(selectedRecipe);
+    selectedRecipe = event.target.textContent;
+    makeSearchResultURL(selectedRecipe);
 })
 
 /* ===DISPLAY-VIDEO=== */
 
 // video fetching code
 key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
-var searchQuery; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0'; 
+var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key; 
 var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
 
 function makeSearchResultURL(selectedRecipe) {
-   searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-   searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=' + searchQuery + '&key=' + key; 
-   getYoutubeVideo(searchResults);
-}
-
-function getYoutubeVideo() {
-   // search results through google api
-
-   // fetch request to obtain the response from the youtube api
-
+    var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+    console.log(searchQuery);
+    var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
+    
     fetch(searchResults).then(function (response) {
         return response.json()
     }).then(function (data) {
@@ -110,22 +101,58 @@ function getYoutubeVideo() {
         // checks if videoId is undefined, in the case that the first result is not a video
         for (var i = 0; i <= data.items.length; i++) {
             if(data.items[i].id.videoId === undefined) {
+                console.log("test");
                 continue;
             } else {
                 videoID = data.items[i].id.videoId;
+                console.log("test2");
                 break;
             }
         }
-            
-    })
-    recipeURL = "https://www.youtube.com/watch?v=" + videoID;
-    console.log(videoID);
-    console.log(recipeURL);
-    console.log(selectedRecipe);
-    console.log(searchQuery);
-    var youtubeVideo = document.getElementById('youtube-video');
-    youtubeVideo.src = recipeURL;
+    }).then(function() {
+        console.log(videoID);
+        recipeURL = "https://www.youtube.com/watch?v=" + videoID;
+        console.log(recipeURL);
+        console.log(selectedRecipe);
+        console.log(searchQuery);
+        var youtubeVideo = document.getElementById('youtube-video');
+        youtubeVideo.src = recipeURL;
+    }).then(function() {
+        saveRecipe(recipeURL);
+    });
+    
+    //getYoutubeVideo(searchResults);
 }
+
+// function getYoutubeVideo(videoID) {
+//    // search results through google api
+
+//    // fetch request to obtain the response from the youtube api
+//     fetch(searchResults).then(function (response) {
+//         return response.json()
+//     }).then(function (data) {
+//         console.log(data);
+//         // checks if videoId is undefined, in the case that the first result is not a video
+//         for (var i = 0; i <= data.items.length; i++) {
+//             if(data.items[i].id.videoId === undefined) {
+//                 console.log("test");
+//                 continue;
+//             } else {
+//                 videoID = data.items[i].id.videoId;
+//                 console.log("test2");
+//                 break;
+//             }
+//         }
+//     }).then(function() {
+//         console.log(videoID);
+//         recipeURL = "https://www.youtube.com/watch?v=" + videoID;
+//         console.log(recipeURL);
+//         console.log(selectedRecipe);
+//         console.log(searchQuery);
+//         var youtubeVideo = document.getElementById('youtube-video');
+//         youtubeVideo.src = recipeURL;
+//     })
+// }
 
 
 // this function loads the iframe api to view YT videos
@@ -168,37 +195,22 @@ player.stopVideo();
 var savedData;
 var savedVideos;
 var videoList;
-function saveRecipe() {
+function saveRecipe(recipeURL) {
+    console.log(recipeURL);
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-    //var savedVideo = recipeURL;
-    videoList = [];
-    // test links
-    videoList[0] = "https://www.youtube.com/watch?v=Zae7hxSD3a8";
-    videoList[1] = "https://www.youtube.com/watch?v=0KB-5JDf1Y8";
-    videoList[2] = "https://www.youtube.com/watch?v=yslkYSjAPh4";
-    // put the recipe and video link into an object
-    // savedData = {
-    //     dataOne: {
-    //         recipe: savedRecipes,
-    //         video: savedVideos
-    //     },
-    //     dataTwo: {
-
-    //     }
-    // }
-    //console.log(savedData.video);
-    if (savedRecipes === null) {
+    videoList = JSON.parse(localStorage.getItem("videoList"));
+    if (savedRecipes === null && videoList === null) {
         savedRecipes = [selectedRecipe];
+        videoList = [recipeURL];
     } else {
         savedRecipes.push(selectedRecipe);
+        videoList.push(recipeURL);
     }
 
     localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
-    localStorage.setItem("savedVideos", savedVideos);
+    localStorage.setItem("videoList", JSON.stringify(videoList));
     showRecipeHistory();
 }
-
-//console.log(savedVideo);
 
 // Display recipe in search history
 function showRecipeHistory() {
@@ -213,28 +225,27 @@ function showRecipeHistory() {
             li.classList = 'btn recipe-history__list-group-item';
             li.textContent = recipe;
             recipeHistoryEl.appendChild(li);
-            //recipeURL = videoList[i];
         }
     }
 
-    // link to video when clicking on recipe history
-    // var videoHistory = document.getElementById('video-history-one');
-    // videoHistory.addEventListener('click', function() {
-    //     var oldVideo = videoList[0];
-    //     window.open(oldVideo, '_blank').focus;
-    // })
+    //link to video when clicking on recipe history
+    var videoHistory = document.getElementById('video-history-one');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[0];
+        window.open(oldVideo, '_blank').focus;
+    })
 
-    // var videoHistory = document.getElementById('video-history-two');
-    // videoHistory.addEventListener('click', function() {
-    //     var oldVideo = videoList[1];
-    //     window.open(oldVideo, '_blank').focus;
-    // })
+    var videoHistory = document.getElementById('video-history-two');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[1];
+        window.open(oldVideo, '_blank').focus;
+    })
 
-    // var videoHistory = document.getElementById('video-history-three');
-    // videoHistory.addEventListener('click', function() {
-    //     var oldVideo = videoList[2];
-    //     window.open(oldVideo, '_blank').focus;
-    // })
+    var videoHistory = document.getElementById('video-history-three');
+    videoHistory.addEventListener('click', function() {
+        var oldVideo = videoList[2];
+        window.open(oldVideo, '_blank').focus;
+    })
 }
 
 // When page loads, load search history (unsure if we want anything else here?)
