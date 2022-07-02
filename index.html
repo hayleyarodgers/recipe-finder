@@ -77,9 +77,9 @@
         <article class="recipe-history" id="recipe-history">
           <h2>RECIPE HISTORY</h2>
           <ul>
-            <li class="recipe-history__list-group-item" id="video-history-one">Recipe 1</li>
-            <li class="recipe-history__list-group-item" id="video-history-two">Recipe 2</li>
-            <li class="recipe-history__list-group-item" id="video-history-three">Recipe 3</li>
+            <li class="recipe-history__list-group-item">Recipe 1</li>
+            <li class="recipe-history__list-group-item">Recipe 2</li>
+            <li class="recipe-history__list-group-item">Recipe 3</li>
           </ul>
         </article>
       </section>
@@ -122,7 +122,7 @@
         <!-- recipe click through -->
         <article id="youtube-tutorial">
           <!--Insert name of selected recipe into this span element-->
-          <h2>MEATBALL SUB</h2>
+          <h2 id="recipe-title"></h2>
           <!--Embed youtube video here here via the src url-->
           <iframe
             id="youtube-video"
@@ -135,10 +135,7 @@
           ></iframe>
           <!--Insert previously selected ingredients into this span element-->
           <p>
-            This will be a great way to use up your Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Et deserunt exercitationem consequatur
-            culpa quis optio, fugit labore ea sint laboriosam pariatur, non aut!
-            Quo consectetur libero, cumque itaque quod suscipit?
+            This recipe will be a great way to use up your leftover ingredients!
             <span id="selected-ingredients"></span>
           </p>
           <ul>
