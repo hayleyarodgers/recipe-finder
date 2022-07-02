@@ -165,6 +165,7 @@ p {
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
+/* image style class in recipe box */
 .recipe-box__image {
   display: block;
   width: 100%;
@@ -209,11 +210,13 @@ p {
   color: #fff;
   transition: 0.3s;
 }
+/* button hover class */
 .btn:hover {
   background-color: green;
   color: #fff;
 }
-.recipe-history {
+/* recipe history card */
+#recipe-history-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -223,8 +226,7 @@ p {
   background-color: #fff;
   box-shadow: 0px 0px 19px 5px #b1b1b1;
 }
-
-.recipe-history__container:after {
+#recipe-history-container__container:after {
   content: "";
   position: absolute;
   left: 0;
@@ -250,6 +252,15 @@ p {
   background-color: #b1b1b1;
   transition: all 0.4s ease-out;
 }
+<<<<<<< HEAD
+=======
+/* this is for the HTML error page */
+.jumbotron {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+>>>>>>> a2d0d5d62d52012d213a512fd76279af8e5db324
 
 /* Search results card */
 .searchResult {

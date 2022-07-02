@@ -7,11 +7,17 @@
 */
 
 /* ===VARIABLES=== */
+
 // (consolidate our variables and fill this in once all of our functions are done)
+
 
 var recipeSearchResultsEl = document.getElementById('search-results');
 var selectedRecipe;
-var recipeHistoryEl = document.getElementById('recipe-history');
+var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
+var recipeHistoryListEl = document.getElementById('recipe-history-list');
+
+var clearBtn = document.getElementById('clearBtn');
+var youtubeTutorialEl = document.getElementById('youtube-tutorial');
 
 var newRecipe;
 
@@ -20,7 +26,7 @@ var newRecipe;
 // Event listener that runs search function on click
 
 var newSearch = document.getElementById('searchBtn');
-newSearch.addEventListener("click",fn1);
+newSearch.addEventListener("click", fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
 function fn1(e) {
@@ -29,18 +35,18 @@ function fn1(e) {
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
-    
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+
     fetch(newRecipe)
         .then(response => {
-            if (!response.ok){
+            if (!response.ok) {
                 throw Error("ERROR")
             };
             return response.json();
-    })
-    .then(data => {
-        showSearchResults(data);
-    });
+        })
+        .then(data => {
+            showSearchResults(data);
+        });
 
     var inputs = document.querySelectorAll('#form1, #form2, #form3')
     inputs.forEach(input => {
@@ -48,37 +54,41 @@ function fn1(e) {
     });
 
     e.preventDefault();
+
+
 };
 
 /* ===DISPLAY-RESULTS=== */
 
 // After data fetched from spoonacular API, show top ten search results
 function showSearchResults(data) {
+    recipeSearchResultsEl.style.display = "block";
+
     for (var i = 0; i < data.length; i++) {
         var recipe = data[i].title;
         var recipeImage = data[i].image;
         var li = document.createElement('li');
 
         li.innerHTML = `
-            <div class="card mb-3 searchResult">
-                <div class="row no-gutters">
-                    <img src="` + recipeImage + `" class="card-img col-md-4" alt="Photo of recipe">
-                    <div class="card-body col-md-8 pl-4 my-auto">
-                        <h2 class="card-title">` + recipe + `</h2>
-                    </div>
-                </div>
+        <div class="card mb-3 searchResult">
+        <div class="row no-gutters">
+            <img src="` + recipeImage + `" class="card-img col-md-4" alt="Photo of recipe">
+            <div class="card-body col-md-8 pl-4 my-auto">
+                <h2 class="card-title">` + recipe + `</h2>
             </div>
-            `;
+        </div>
+        `;
 
-            recipeSearchResultsEl.appendChild(li);
-        }
+        recipeSearchResultsEl.appendChild(li);
+    }
 }
 
 // When a search result is clicked, load a youtube video tutorial
-recipeSearchResultsEl.addEventListener('click', function(event) {
+recipeSearchResultsEl.addEventListener('click', function (event) {
     selectedRecipe = event.target.textContent;
     makeSearchResultURL(selectedRecipe);
 })
+
 
 /* ===DISPLAY-VIDEO=== */
 
@@ -90,6 +100,9 @@ var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
 
 function makeSearchResultURL(selectedRecipe) {
+    recipeSearchResultsEl.style.display = "none";
+    youtubeTutorialEl.style.display = "block";    
+
     var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
     
@@ -119,70 +132,6 @@ function makeSearchResultURL(selectedRecipe) {
         saveRecipe(recipeURL);
     });
     
-    //getYoutubeVideo(searchResults);
-}
-
-// function getYoutubeVideo(videoID) {
-//    // search results through google api
-
-//    // fetch request to obtain the response from the youtube api
-//     fetch(searchResults).then(function (response) {
-//         return response.json()
-//     }).then(function (data) {
-//         console.log(data);
-//         // checks if videoId is undefined, in the case that the first result is not a video
-//         for (var i = 0; i <= data.items.length; i++) {
-//             if(data.items[i].id.videoId === undefined) {
-//                 console.log("test");
-//                 continue;
-//             } else {
-//                 videoID = data.items[i].id.videoId;
-//                 console.log("test2");
-//                 break;
-//             }
-//         }
-//     }).then(function() {
-//         console.log(videoID);
-//         recipeURL = "https://www.youtube.com/watch?v=" + videoID;
-//         console.log(recipeURL);
-//         console.log(selectedRecipe);
-//         console.log(searchQuery);
-//         var youtubeVideo = document.getElementById('youtube-video');
-//         youtubeVideo.src = recipeURL;
-//     })
-// }
-
-
-// this function loads the iframe api to view YT videos
-// check if below functions are needed...
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-    height: '390',
-    width: '640',
-    videoId: videoID,
-    playerVars: {
-        'playsinline': 1
-        },
-        events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-        }
-        });
-}
-
-function onPlayerReady(event) {
-event.target.playVideo();
-}
-
-var done = false;
-function onPlayerStateChange(event) {
-if (event.data == YT.PlayerState.PLAYING && !done) {
-    setTimeout(stopVideo, 6000);
-    done = true;
-}
-}
-function stopVideo() {
-player.stopVideo();
 }
 
 
@@ -226,12 +175,19 @@ function showRecipeHistory() {
             a.href = oldVideo;
             li.appendChild(a);
             recipeHistoryEl.appendChild(li);
-            console.log(videoList[i]);
         }
     }
 }
 
 // When page loads, load search history (unsure if we want anything else here?)
-window.onload = function() {
+window.onload = function () {
+    recipeSearchResultsEl.style.display = "none";
+    youtubeTutorialEl.style.display = "none";
     showRecipeHistory();
 }
+
+// clear recipe history
+clearBtn.addEventListener("click", function () {
+    localStorage.clear();
+    recipeHistoryListEl.innerHTML = '';
+})
