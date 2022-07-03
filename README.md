@@ -14,7 +14,7 @@ Our group decided to do a "Recipe finder" that allowed the user to type in 3 ing
 
 To achieve this our group used an API from Spoonacular, HTML, CSS and Javascript.
 
-During this project, we also used Bootstrap, Moment.js()
+During this project, we also used Bootstrap and Moment.js()
 
 # credits
 

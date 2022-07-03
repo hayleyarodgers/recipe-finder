@@ -20,6 +20,7 @@ html {
 header {
   background: var(--green);
   height: auto;
+  width: 100%;
 }
 /* header after effects */
 header::after {
@@ -258,6 +259,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 }
 
 /* Search results card */

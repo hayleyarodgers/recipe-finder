@@ -102,7 +102,7 @@ function makeSearchResultURL(selectedRecipe) {
     youtubeTutorialEl.style.display = "block";
 
     var searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-    var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0';
+    var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&number=10&apiKey=eb22cf15c05d413e81e15f216ad6bea3';
     getYoutubeVideo(searchResults);
 }
 
