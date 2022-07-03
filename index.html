@@ -70,6 +70,12 @@
               placeholder="Third Ingredient"
               id="form3"
             />
+            <div class="modal" id="myModal">
+              <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>No results found - please try entering some new ingredients</p>
+            </div>
+            </div>
             <button class="btn" id="searchBtn">Search</button>
           </form>
         </article>
@@ -86,42 +92,9 @@
       </section>
       <!-- results -->
       <section class="right-wrap">
-        <article class="card" style="width: 18rem" id="recipe-card">
-          <img
-            src="./Assets/Images/meal demo.jpeg"
-            class="card-img-top"
-            alt="Recipe lifestyle image 1"
-          />
-          <div class="card-body">
-            <h2>Card title</h2>
-            <h2 id="result1"></h2>
-          </div>
+        <article>
+          <ul id="search-results"></ul>
         </article>
-        <article class="card" style="width: 18rem" id="recipe-card">
-          <img
-            src="./Assets/Images/meal demo.jpeg"
-            class="card-img-top"
-            alt="Recipe lifestyle image 2"
-          />
-          <div class="card-body">
-            <h2 id="result1"></h2>
-          </div>
-        </article>
-        <article class="card" style="width: 18rem" id="recipe-card">
-          <img
-            src="./Assets/Images/meal demo.jpeg"
-            class="card-img-top"
-            alt="Recipe lifestyle image 3"
-          />
-          <div class="card-body">
-            <h2 id="result1"></h2>
-          </div>
-        </article>
-        <ul id="search-results">
-        </ul>
-        
-        <ul id="search-results"></ul>
-
         <!-- recipe click through -->
         <article id="youtube-tutorial">
           <!--Insert name of selected recipe into this span element-->
@@ -168,7 +141,7 @@
       </div>
     </footer>
     <!--Bootstrap-->
-    <script
+    <scripts
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
