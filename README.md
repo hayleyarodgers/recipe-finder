@@ -25,5 +25,8 @@ https://github.com/hayleyarodgers/recipe-finder
 Spoonacular API:
 https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 
+Youtube API:
+YouTube: https://developers.google.com/youtube
+
 Fetch API & Rendering Data with JavaScript:
 https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s
