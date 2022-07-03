@@ -38,16 +38,19 @@ function fn1(e) {
 
     var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
 
-    fetch(newRecipe)
-        .then(response => {
-            if (!response.ok) {
-                throw Error("ERROR")
-            };
-            return response.json();
-        })
-        .then(data => {
-            showSearchResults(data);
-        });
+   var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+ 
+   fetch(newRecipe)
+      .then(response => {
+         if (response.status !== 200){
+            window.location.href = "./statusError.html";
+            throw Error("ERROR")
+         };
+         return response.json();
+   })
+   .then(data => {
+      console.log(data);
+   });
 
     var inputs = document.querySelectorAll('#form1, #form2, #form3')
     inputs.forEach(input => {
