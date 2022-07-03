@@ -1,4 +1,4 @@
-# Module 06 Mini-Project: Library of Congress Search Tool - recipe-finder
+# Module 06 Mini-Project: - recipe-finder
 
 # description
 
@@ -14,11 +14,15 @@ To achieve this our group used an API from Spoonacular, HTML, CSS and Javascript
 
 During this project, we also used Bootstrap and Moment.js()
 
-# Repository
+# repository
 
 https://github.com/hayleyarodgers/recipe-finder
 
-# Example
+# example
+
+![](https://raw.githubusercontent.com/hayleyarodgers/recipe-finder/5d5ab0c00a1d6d25ec8ee78b95a490958e7246ef/assets/images/Recipe%20FindR%20results.png)
+
+![](https://raw.githubusercontent.com/hayleyarodgers/recipe-finder/5d5ab0c00a1d6d25ec8ee78b95a490958e7246ef/assets/images/Recipe%20FindR%20video%20result.png)
 
 # credits
 
