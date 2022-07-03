@@ -16,7 +16,6 @@ var selectedRecipe;
 var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
 var recipeHistoryListEl = document.getElementById('recipe-history-list');
 
-var clearBtn = document.getElementById('clearBtn');
 var youtubeTutorialEl = document.getElementById('youtube-tutorial');
 
 var newRecipe;
@@ -30,21 +29,29 @@ newSearch.addEventListener("click", fn1);
 
 //Fetch list of recipe names from Spoonacular API based on ingredient inputs
 function fn1(e) {
+    e.preventDefault();
+    recipeSearchResultsEl.innerHTML = ''; // clear html list in case user tries to search without selecting a recipe
     var ingred = document.getElementById('form1').value;
     var ingred2 = document.getElementById('form2').value;
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=0d9ec777d83f403b8ae14136bf45e4e4';
 
+    console.log(ingred);
+    console.log(ingred2);
+    console.log(ingred3);
+    console.log(allIngreds);
+    console.log(newRecipe);
     fetch(newRecipe)
         .then(response => {
             if (!response.ok) {
-                throw Error("ERROR")
+                throw Error("ERROR");
             };
             return response.json();
         })
         .then(data => {
+            console.log(data);
             showSearchResults(data);
         });
 
@@ -52,10 +59,6 @@ function fn1(e) {
     inputs.forEach(input => {
         input.value = '';
     });
-
-    e.preventDefault();
-
-
 };
 
 /* ===DISPLAY-RESULTS=== */
@@ -86,6 +89,7 @@ function showSearchResults(data) {
 // When a search result is clicked, load a youtube video tutorial
 recipeSearchResultsEl.addEventListener('click', function (event) {
     selectedRecipe = event.target.textContent;
+    recipeSearchResultsEl.innerHTML = '';
     makeSearchResultURL(selectedRecipe);
 })
 
@@ -93,7 +97,7 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 /* ===DISPLAY-VIDEO=== */
 
 // video fetching code
-key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
+key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
 var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key; 
 var videoID; // grabs video id to load a video for each recipe
@@ -121,6 +125,7 @@ function makeSearchResultURL(selectedRecipe) {
         }
     }).then(function() {
         recipeURL = "https://www.youtube.com/watch?v=" + videoID;
+        
         // display recipe title
         var recipeHeading = document.getElementById("recipe-title");
         recipeHeading.textContent = selectedRecipe;
@@ -157,7 +162,7 @@ function saveRecipe(recipeURL) {
 
 // Display recipe in search history
 function showRecipeHistory() {
-    recipeHistoryEl.innerHTML = '';
+    recipeHistoryListEl.innerHTML = '';
         
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     var videoList = JSON.parse(localStorage.getItem("videoList"));
@@ -174,10 +179,18 @@ function showRecipeHistory() {
             a.textContent = recipe;
             a.href = oldVideo;
             li.appendChild(a);
-            recipeHistoryEl.appendChild(li);
+            recipeHistoryListEl.appendChild(li);
         }
     }
+
+    // clear recipe history
+    var clearBtn = document.getElementById('clearBtn');
+    clearBtn.addEventListener('click', function () {
+    localStorage.clear();
+    recipeHistoryListEl.innerHTML = '';
+})
 }
+
 
 // When page loads, load search history (unsure if we want anything else here?)
 window.onload = function () {
@@ -186,8 +199,3 @@ window.onload = function () {
     showRecipeHistory();
 }
 
-// clear recipe history
-clearBtn.addEventListener("click", function () {
-    localStorage.clear();
-    recipeHistoryListEl.innerHTML = '';
-})
