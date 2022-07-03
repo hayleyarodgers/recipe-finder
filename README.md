@@ -1,6 +1,4 @@
-# recipe-finder
-
-Group "project01-01" - Recipe Findr
+# Module 06 Mini-Project: Library of Congress Search Tool - recipe-finder
 
 # description
 
@@ -14,15 +12,18 @@ Our group decided to do a "Recipe finder" that allowed the user to type in 3 ing
 
 To achieve this our group used an API from Spoonacular, HTML, CSS and Javascript.
 
-During this project, we also used Bootstrap, Moment.js()
-
-# credits
-
-Spoonacular API: https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
+During this project, we also used Bootstrap and Moment.js()
 
 # Repository
 
 https://github.com/hayleyarodgers/recipe-finder
-https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s&ab_channel=CodeBushi
 
 # Example
+
+# credits
+
+Spoonacular API:
+https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
+
+Fetch API & Rendering Data with JavaScript:
+https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s
