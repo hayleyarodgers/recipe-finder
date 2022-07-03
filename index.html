@@ -70,6 +70,12 @@
               placeholder="Third Ingredient"
               id="form3"
             />
+            <div class="modal" id="myModal">
+              <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>No results found - please try entering some new ingredients</p>
+            </div>
+            </div>
             <button class="btn" id="searchBtn">Search</button>
           </form>
         </article>
@@ -92,12 +98,12 @@
         <!-- recipe click through -->
         <article id="youtube-tutorial">
           <!--Insert name of selected recipe into this span element-->
-          <h2>MEATBALL SUB</h2>
+          <h2 id="recipe-title"></h2>
           <!--Embed youtube video here here via the src url-->
           <iframe
+            id="youtube-video"
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/nRWIPKYuBRg"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -105,10 +111,7 @@
           ></iframe>
           <!--Insert previously selected ingredients into this span element-->
           <p>
-            This will be a great way to use up your Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Et deserunt exercitationem consequatur
-            culpa quis optio, fugit labore ea sint laboriosam pariatur, non aut!
-            Quo consectetur libero, cumque itaque quod suscipit?
+            This recipe will be a great way to use up your leftover ingredients.
             <span id="selected-ingredients"></span>
           </p>
           <ul>
