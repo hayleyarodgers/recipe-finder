@@ -19,7 +19,19 @@ var recipeHistoryListEl = document.getElementById('recipe-history-list');
 var clearBtn = document.getElementById('clearBtn');
 var youtubeTutorialEl = document.getElementById('youtube-tutorial');
 
-var newRecipe;
+var ingred = document.getElementById('form1').value;
+var ingred2 = document.getElementById('form2').value;
+var ingred3 = document.getElementById('form3').value;
+var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+
+var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("searchBtn");
+var span = document.getElementsByClassName("close")[0];
+var data = data
+ 
 
 /* ===SEARCH=== */
 
@@ -39,8 +51,14 @@ function fn1(e) {
     var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=eb22cf15c05d413e81e15f216ad6bea3';
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
- 
+
    fetch(newRecipe)
+  .then(response => {
+     if (!response.ok){
+        throw Error("ERROR")
+     };
+     return response.json();
+    })
       .then(response => {
          if (response.status !== 200){
             window.location.href = "./statusError.html";
@@ -49,18 +67,38 @@ function fn1(e) {
          return response.json();
    })
    .then(data => {
-      console.log(data);
+   console.log(data);
+   if (data.length === 0) {
+     modal.style.display = "block";
+   } else {
+     modal.style.display = "none";
+   }
+   
    });
 
+   span.onclick = function() {
+      modal.style.display = "none";
+   };
+
+   window.onclick = function(event) {
+      if (event.target == modal) {
+         modal.style.display = "none";
+      };
+   };
+
+   var inputs = document.querySelectorAll('#form1, #form2, #form3')
+   inputs.forEach(input => {
+      input.value = '';
+   });
+   e.preventDefault();
     var inputs = document.querySelectorAll('#form1, #form2, #form3')
     inputs.forEach(input => {
         input.value = '';
     });
 
     e.preventDefault();
-
-
 };
+
 
 /* ===DISPLAY-RESULTS=== */
 
