@@ -36,7 +36,7 @@ function fn1(e) {
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=eb22cf15c05d413e81e15f216ad6bea3';
 
    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
  
@@ -103,7 +103,7 @@ key = "AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0"; // api key for yt
 function makeSearchResultURL(selectedRecipe) {
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "block";
-    
+
     var searchQuery = selectedRecipe; // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=AIzaSyAS8g3KcaT03dC34Re_lsr5pQSE2TMrzL0';
     getYoutubeVideo(searchResults);
@@ -194,7 +194,7 @@ function showRecipeHistory() {
 
     if (savedRecipes !== null) {
         recipeHistoryContainerEl.style.display = "block";
-        
+
         for (var i = 0; i < savedRecipes.length; i++) {
             var recipe = savedRecipes[i];
             var li = document.createElement("li");
