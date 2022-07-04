@@ -131,6 +131,7 @@ p {
   justify-content: flex-start;
   margin: 25px;
   gap: 1rem;
+  height: 100%;
 }
 /* enter ingredients and previous recipes wrap */
 .left-wrap {
@@ -210,8 +211,6 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
   justify-content: center;
   gap: 1rem;
   overflow: scroll;
@@ -224,6 +223,8 @@ p {
   gap: 2rem;
   flex: 1;
   text-align: left;
+  margin-top: 25px;
+  padding: 25px;
 }
 .searchResult .card-title {
   text-align: left;
@@ -248,6 +249,10 @@ iframe {
   align-content: center;
   margin: auto;
   display: block;
+}
+#recipe-title {
+  text-transform: uppercase;
+  margin-bottom: 25px;
 }
 /* recipe history card */
 #recipe-history-container {
@@ -372,13 +377,15 @@ iframe {
 
 /* Modal Content/Box */
 .modal-content {
+  display: flex;
+  flex-direction: row;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 450px;
+  height: 200px;
 }
-
 /* The Close Button */
 .close {
   color: #aaa;
@@ -395,8 +402,14 @@ iframe {
 }
 /* site media */
 @media screen and (max-width: 1600px) {
-  #youtube-tutorial {
+  .wrap {
     display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+  }
+  #youtube-tutorial {
+    display: inline-flex;
     gap: 2rem;
     width: 100%;
     flex: 1;

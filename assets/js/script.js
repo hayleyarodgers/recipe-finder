@@ -30,7 +30,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("searchBtn");
 var span = document.getElementsByClassName("close")[0];
 var data = data;
- 
+
 
 /* ===SEARCH=== */
 
@@ -48,33 +48,33 @@ function fn1(e) {
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=0d9ec777d83f403b8ae14136bf45e4e4';
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=18e518c80cc34dcb84d2c7e1175244e1';
 
     fetch(newRecipe)
-    .then(response => {
-        console.log(response);
-        if (!response.ok){
-            throw Error("ERROR")
-        };
-        if (response.status !== 200) {
-            window.location.href = "./statusError.html";
-            throw Error("ERROR");
-        };
-        return response.json();
+        .then(response => {
+            console.log(response);
+            if (!response.ok) {
+                throw Error("ERROR")
+            };
+            if (response.status !== 200) {
+                window.location.href = "./statusError.html";
+                throw Error("ERROR");
+            };
+            return response.json();
         }).then(data => {
-    if (data.length === 0) {
-        modal.style.display = "block";
-    } else {
-        modal.style.display = "none";
-    }
-    showSearchResults(data);
-    });
+            if (data.length === 0) {
+                modal.style.display = "block";
+            } else {
+                modal.style.display = "none";
+            }
+            showSearchResults(data);
+        });
 
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     };
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         };
@@ -128,44 +128,44 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 // video fetching code
 key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
 var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key; 
+var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
 var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
 
 function makeSearchResultURL(selectedRecipe) {
     recipeSearchResultsEl.style.display = "none";
-    youtubeTutorialEl.style.display = "block";    
+    youtubeTutorialEl.style.display = "block";
 
     var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
-    
+
     fetch(searchResults).then(function (response) {
         return response.json()
     }).then(function (data) {
         console.log(data);
         // checks if videoId is undefined, in the case that the first result is not a video
         for (var i = 0; i <= data.items.length; i++) {
-            if(data.items[i].id.videoId === undefined) {
+            if (data.items[i].id.videoId === undefined) {
                 continue;
             } else {
                 videoID = data.items[i].id.videoId;
                 break;
             }
         }
-    }).then(function() {
+    }).then(function () {
         recipeURL = "https://www.youtube.com/watch?v=" + videoID;
-        
+
         // display recipe title
         var recipeHeading = document.getElementById("recipe-title");
         recipeHeading.textContent = selectedRecipe;
-        
+
         var youtubeVideo = document.getElementById('youtube-video');
         var youtubeEmbedLink = "https://www.youtube.com/embed/" + videoID;
         youtubeVideo.setAttribute("src", youtubeEmbedLink);
-    }).then(function() {
+    }).then(function () {
         saveRecipe(recipeURL);
     });
-    
+
 }
 
 
@@ -192,10 +192,10 @@ function saveRecipe(recipeURL) {
 // Display recipe in search history
 function showRecipeHistory() {
     recipeHistoryListEl.innerHTML = '';
-        
+
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     var videoList = JSON.parse(localStorage.getItem("videoList"));
-    
+
     if (savedRecipes !== null) {
         for (var i = 0; i < savedRecipes.length; i++) {
             var recipe = savedRecipes[i];
@@ -215,9 +215,9 @@ function showRecipeHistory() {
     // clear recipe history
     var clearBtn = document.getElementById('clearBtn');
     clearBtn.addEventListener('click', function () {
-    localStorage.clear();
-    recipeHistoryListEl.innerHTML = '';
-})
+        localStorage.clear();
+        recipeHistoryListEl.innerHTML = '';
+    })
 }
 
 
