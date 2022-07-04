@@ -92,7 +92,6 @@ function showSearchResults(data) {
     recipeSearchResultsEl.style.display = "block";
 
     for (var i = 0; i < data.length; i++) {
-        console.log('test2');
         var recipe = data[i].title;
         var recipeImage = data[i].image;
         var li = document.createElement('li');
@@ -123,8 +122,8 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 
 // video fetching code
 key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
-var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
+//var searchQuery = (selectedRecipe + ' tutorial').replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+//var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
 var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
 
@@ -132,13 +131,12 @@ function makeSearchResultURL(selectedRecipe) {
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "block";
 
-    var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+    var searchQuery = (selectedRecipe + ' tutorial').replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
 
     fetch(searchResults).then(function (response) {
         return response.json()
     }).then(function (data) {
-        console.log(data);
         // checks if videoId is undefined, in the case that the first result is not a video
         for (var i = 0; i <= data.items.length; i++) {
             if (data.items[i].id.videoId === undefined) {
