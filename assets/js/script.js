@@ -41,6 +41,9 @@ var btn = document.getElementById("searchBtn");
 var span = document.getElementsByClassName("close")[0];
 var data = data;
 
+// Email submission related elements
+var emailSubmissionButton = document.getElementById('footer-email-btn');
+var emailSubmissionEl = document.getElementById('footer-email');
 
 /* ===SEARCH=== */
 
@@ -217,6 +220,11 @@ clearBtn.addEventListener('click', function() {
     localStorage.clear();
     recipeHistoryListEl.innerHTML = '';
     recipeHistoryContainerEl.style.display = "none";
+})
+
+// When send button is clicked, email is "saved" - future functionality
+emailSubmissionButton.addEventListener('click', function() {
+    emailSubmissionEl.value = '';
 })
 
 // When page loads, load search history and hide all results
