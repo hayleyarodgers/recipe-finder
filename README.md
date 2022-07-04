@@ -1,36 +1,51 @@
-# Module 06 Mini-Project: - recipe-finder
+# RECIPE FINDR
 
-# description
+# Description
 
-Our task was to work with a group to build an application that searches and displays results from the Library of Congress API.
+Our goal for this collaborative project was to build a real-world front-end application from scratch.
 
-# what
+### RECIPE FINDR
 
-Our group decided to do a "Recipe finder" that allowed the user to type in 3 ingreadientes to return a result of potential meals that can be cooked featuring those ingredients.
+Our group created **RECIPE FINDR**, an application that gives the user a video tutorial for a recipe that uses ingredients they have at hand.
 
-# how
+RECIPE FINDR asks for up to three ingredients of the user's choice. It then searches the Spoonacular API for recipes using these ingredients, before displaying a list of recipe name results. Then, when a user selects the recipe they want to make, RECIPE FINDR searches the YouTube API for video tutorials on how to make this recipe. Users can return to a previously selected recipe at any point via the recipe history or do a new search.
 
-To achieve this our group used an API from Spoonacular, HTML, CSS and Javascript.
+This allows the user to cook a meal using the ingredients they have at hand. This aims to help empower them to cook new meals and reconnect with the creativity of cooking, in addition to reducing time spent shopping and potentially reducing food wastage.
 
-During this project, we also used Bootstrap and Moment.js()
+### Tools and Technologies Used
 
-# repository
+To achieve this our group used HTML, CSS and Javascript. In addition, we used several APIs including:
+- Bootstrap for styling
+- [Spoonacular](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) for getting recipe names
+- And, [YouTube](https://developers.google.com/youtube/v3/docs/) for getting video recipe tutorials.
 
-https://github.com/hayleyarodgers/recipe-finder
+### Screenshots of Application
 
-# example
+![Screenshot1 of application in Google Chrome browser](./assets/images/Recipe%20FindR%20results.png)
 
-![](https://raw.githubusercontent.com/hayleyarodgers/recipe-finder/5d5ab0c00a1d6d25ec8ee78b95a490958e7246ef/assets/images/Recipe%20FindR%20results.png)
+![Screenshot2 of application in Google Chrome browser](./assets/images/Recipe%20FindR%20video%20result.png)
 
-![](https://raw.githubusercontent.com/hayleyarodgers/recipe-finder/5d5ab0c00a1d6d25ec8ee78b95a490958e7246ef/assets/images/Recipe%20FindR%20video%20result.png)
+### Original Wireframes of Application
 
-# credits
+![Screenshot1 of wireframe](./assets/images/wireframe_results.png)
 
-Spoonacular API:
-https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
+![Screenshot2 of wireframe](./assets/images/wireframe_video.png)
 
-Youtube API:
-YouTube: https://developers.google.com/youtube
 
-Fetch API & Rendering Data with JavaScript:
-https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s
+## Usage
+1. Enter up to three ingredients in the search form.
+2. Click search.
+3. Click a recipe from the list of ideas.
+4. Watch the video tutorial for how to make your recipe of choice.
+
+## Access
+
+To access the live application via Github Pages, click [here](https://hayleyarodgers.github.io/recipe-finder/). 
+
+To access the repository where the code I refactored is saved, click [here](https://github.com/hayleyarodgers/recipe-finder).
+
+## Credits
+
+- Documentation for [Spoonacular API](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients).
+- Documentation for [YouTube API](https://developers.google.com/youtube/v3/docs/).
+- A [tutorial](https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s) we used to help develop our understanding of fetching APIs and rendering data with JavaScript.
