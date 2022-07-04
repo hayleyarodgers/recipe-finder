@@ -52,11 +52,9 @@ function fn1(e) {
 
     fetch(newRecipe)
         .then(response => {
-            console.log(response);
-            if (!response.ok) {
-                throw Error("ERROR")
-            };
             if (response.status !== 200) {
+                var errorStatus = response.status;
+                localStorage.setItem("errorStatus", JSON.stringify(errorStatus));
                 window.location.href = "./statusError.html";
                 throw Error("ERROR");
             };
@@ -91,8 +89,6 @@ function fn1(e) {
 
 // After data fetched from spoonacular API, show top ten search results
 function showSearchResults(data) {
-    console.log('test');
-    console.log(data);
     recipeSearchResultsEl.style.display = "block";
 
     for (var i = 0; i < data.length; i++) {
