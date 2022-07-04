@@ -219,6 +219,7 @@ function showRecipeHistory() {
 
 // When page loads, load search history (unsure if we want anything else here?)
 window.onload = function () {
+    recipeHistoryContainerEl.style.display = "none";
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "none";
     showRecipeHistory();
