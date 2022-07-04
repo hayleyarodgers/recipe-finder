@@ -6,26 +6,36 @@
     5. =STORAGE
 */
 
+
 /* ===VARIABLES=== */
 
-// (consolidate our variables and fill this in once all of our functions are done)
-
-
-var recipeSearchResultsEl = document.getElementById('search-results');
-var selectedRecipe;
-var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
-var recipeHistoryListEl = document.getElementById('recipe-history-list');
-
-var youtubeTutorialEl = document.getElementById('youtube-tutorial');
-
+// Ingredient search related elements
 var ingred = document.getElementById('form1').value;
 var ingred2 = document.getElementById('form2').value;
 var ingred3 = document.getElementById('form3').value;
 var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
+var newSearch = document.getElementById('searchBtn');
+spoonacularAPIKey = "18e518c80cc34dcb84d2c7e1175244e1";
 
-//var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ allIngreds + '&number=10&apiKey=39791063581a4d96a908bb19745b3f64';
+// Recipe search related elements
+var selectedRecipe;
+var rightWrapContainer = document.getElementById('right-wrap');
+var recipeSearchResultsEl = document.getElementById('search-results');
+var youtubeTutorialEl = document.getElementById('youtube-tutorial');
 
+// Video search related elements
+youtubeAPIKey = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU";
+var searchQuery;
+var searchResults;
+var videoID;
+var recipeURL;
 
+// Search history related elements
+var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
+var recipeHistoryListEl = document.getElementById('recipe-history-list');
+var clearBtn = document.getElementById('clearBtn');
+
+// Modal related elements
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("searchBtn");
 var span = document.getElementsByClassName("close")[0];
@@ -34,21 +44,18 @@ var data = data;
 
 /* ===SEARCH=== */
 
-// Event listener that runs search function on click
+// When search button is clicked, fetch list of recipe names from Spoonacular API based on ingredient inputs
+newSearch.addEventListener("click", getRecipeNames);
 
-var newSearch = document.getElementById('searchBtn');
-newSearch.addEventListener("click", fn1);
-
-//Fetch list of recipe names from Spoonacular API based on ingredient inputs
-function fn1(e) {
-    e.preventDefault();
+function getRecipeNames(event) {
+    event.preventDefault();
     recipeSearchResultsEl.innerHTML = ''; // clear html list in case user tries to search without selecting a recipe
     var ingred = document.getElementById('form1').value;
     var ingred2 = document.getElementById('form2').value;
     var ingred3 = document.getElementById('form3').value;
     var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 
-    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=18e518c80cc34dcb84d2c7e1175244e1';
+    var newRecipe = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=' + allIngreds + '&number=10&apiKey=' + spoonacularAPIKey;
 
     fetch(newRecipe)
         .then(response => {
@@ -72,13 +79,13 @@ function fn1(e) {
         modal.style.display = "none";
     };
 
-    window.onclick = function (event) {
+    window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         };
     };
 
-    var inputs = document.querySelectorAll('#form1, #form2, #form3')
+    var inputs = document.querySelectorAll('#form1, #form2, #form3');
     inputs.forEach(input => {
         input.value = '';
     });
@@ -89,6 +96,7 @@ function fn1(e) {
 
 // After data fetched from spoonacular API, show top ten search results
 function showSearchResults(data) {
+    rightWrapContainer.style.display = "block";
     recipeSearchResultsEl.style.display = "block";
 
     for (var i = 0; i < data.length; i++) {
@@ -110,7 +118,7 @@ function showSearchResults(data) {
     }
 }
 
-// When a search result is clicked, load a youtube video tutorial
+// When a search result is clicked, load a Youtube video tutorial
 recipeSearchResultsEl.addEventListener('click', function (event) {
     selectedRecipe = event.target.textContent;
     recipeSearchResultsEl.innerHTML = '';
@@ -120,13 +128,7 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 
 /* ===DISPLAY-VIDEO=== */
 
-// video fetching code
-key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
-//var searchQuery = (selectedRecipe + ' tutorial').replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-//var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
-var videoID; // grabs video id to load a video for each recipe
-var recipeURL; // links recipe for video. 
-
+// When a recipe name is clicked, fetch a video using YouTube API
 function makeSearchResultURL(selectedRecipe) {
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "block";
@@ -135,7 +137,7 @@ function makeSearchResultURL(selectedRecipe) {
     var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
 
     fetch(searchResults).then(function (response) {
-        return response.json()
+        return response.json();
     }).then(function (data) {
         // checks if videoId is undefined, in the case that the first result is not a video
         for (var i = 0; i <= data.items.length; i++) {
@@ -166,10 +168,10 @@ function makeSearchResultURL(selectedRecipe) {
 /* ===STORAGE=== */
 
 // Save recipe in local storage
-// should also save youtube link
 function saveRecipe(recipeURL) {
     var savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     var videoList = JSON.parse(localStorage.getItem("videoList"));
+
     if (savedRecipes === null && videoList === null) {
         savedRecipes = [selectedRecipe];
         videoList = [recipeURL];
@@ -191,11 +193,14 @@ function showRecipeHistory() {
     var videoList = JSON.parse(localStorage.getItem("videoList"));
 
     if (savedRecipes !== null) {
+        recipeHistoryContainerEl.style.display = "block";
+        
         for (var i = 0; i < savedRecipes.length; i++) {
             var recipe = savedRecipes[i];
             var oldVideo = videoList[i];
             var li = document.createElement("li");
             var a = document.createElement("a");
+
             a.setAttribute("target", "_blank");
             li.setAttribute("style", "list-style-type: none");
             a.classList = 'btn recipe-history__list-group-item';
@@ -205,20 +210,20 @@ function showRecipeHistory() {
             recipeHistoryListEl.appendChild(li);
         }
     }
-
-    // clear recipe history
-    var clearBtn = document.getElementById('clearBtn');
-    clearBtn.addEventListener('click', function () {
-        localStorage.clear();
-        recipeHistoryListEl.innerHTML = '';
-    })
 }
 
+// When clear button is clicked, clear recipe history
+clearBtn.addEventListener('click', function() {
+    localStorage.clear();
+    recipeHistoryListEl.innerHTML = '';
+    recipeHistoryContainerEl.style.display = "none";
+})
 
-// When page loads, load search history (unsure if we want anything else here?)
-window.onload = function () {
+// When page loads, load search history and hide all results
+window.onload = function() {
+    recipeHistoryContainerEl.style.display = "none";
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "none";
+    rightWrapContainer.style.display = "none";
     showRecipeHistory();
 }
-

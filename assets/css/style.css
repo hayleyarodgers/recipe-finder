@@ -134,7 +134,7 @@ p {
   height: 100%;
 }
 /* enter ingredients and previous recipes wrap */
-.left-wrap {
+#left-wrap {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -206,7 +206,7 @@ p {
   color: #fff;
 }
 /* results Wrap */
-.right-wrap {
+#right-wrap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
