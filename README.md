@@ -17,7 +17,7 @@ This allows the user to cook a meal using the ingredients they have at hand. Thi
 To achieve this our group used HTML, CSS and Javascript. In addition, we used several APIs including:
 - Bootstrap for styling
 - [Spoonacular](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) for getting recipe names
-- And, [YouTube ](https://developers.google.com/youtube/v3/docs/) for getting video recipe tutorials.
+- And, [YouTube](https://developers.google.com/youtube/v3/docs/) for getting video recipe tutorials.
 
 ### Screenshots of Application
 
