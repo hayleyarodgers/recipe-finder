@@ -224,7 +224,6 @@ clearBtn.addEventListener('click', function() {
 
 // When send button is clicked, email is "saved" - future functionality
 emailSubmissionButton.addEventListener('click', function() {
-    console.log('working');
     emailSubmissionEl.value = '';
 })
 
