@@ -15,7 +15,7 @@ var ingred2 = document.getElementById('form2').value;
 var ingred3 = document.getElementById('form3').value;
 var allIngreds = ingred + ",+" + ingred2 + ",+" + ingred3;
 var newSearch = document.getElementById('searchBtn');
-spoonacularAPIKey = "18e518c80cc34dcb84d2c7e1175244e1";
+spoonacularAPIKey = "0d9ec777d83f403b8ae14136bf45e4e4";
 
 // Recipe search related elements
 var selectedRecipe;
