@@ -134,7 +134,7 @@ function makeSearchResultURL(selectedRecipe) {
     youtubeTutorialEl.style.display = "block";
 
     var searchQuery = (selectedRecipe + ' tutorial').replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
-    var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
+    var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + youtubeAPIKey;
 
     fetch(searchResults).then(function (response) {
         return response.json();
