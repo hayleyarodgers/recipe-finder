@@ -15,6 +15,7 @@ This allows the user to cook a meal using the ingredients they have at hand. Thi
 ### Tools and Technologies Used
 
 To achieve this our group used HTML, CSS and Javascript. In addition, we used several APIs including:
+
 - Bootstrap for styling
 - [Spoonacular](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) for getting recipe names
 - And, [YouTube](https://developers.google.com/youtube/v3/docs/) for getting video recipe tutorials.
@@ -25,14 +26,16 @@ To achieve this our group used HTML, CSS and Javascript. In addition, we used se
 
 ![Screenshot2 of application in Google Chrome browser](./assets/images/Recipe%20FindR%20video%20result.png)
 
+![Screenshot3 of application in Google Chrome browser](./assets/images/image.png)
+
 ### Original Wireframes of Application
 
 ![Screenshot1 of wireframe](./assets/images/wireframe_results.png)
 
 ![Screenshot2 of wireframe](./assets/images/wireframe_video.png)
 
-
 ## Usage
+
 1. Enter up to three ingredients in the search form.
 2. Click search.
 3. Click a recipe from the list of ideas.
@@ -40,7 +43,7 @@ To achieve this our group used HTML, CSS and Javascript. In addition, we used se
 
 ## Access
 
-To access the live application via Github Pages, click [here](https://hayleyarodgers.github.io/recipe-finder/). 
+To access the live application via Github Pages, click [here](https://hayleyarodgers.github.io/recipe-finder/).
 
 To access the repository where the code I refactored is saved, click [here](https://github.com/hayleyarodgers/recipe-finder).
 
