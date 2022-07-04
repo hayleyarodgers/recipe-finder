@@ -10,7 +10,7 @@
 
 // (consolidate our variables and fill this in once all of our functions are done)
 
-
+var rightWrapContainer = document.getElementById('right-wrap');
 var recipeSearchResultsEl = document.getElementById('search-results');
 var selectedRecipe;
 var recipeHistoryContainerEl = document.getElementById('recipe-history-container');
@@ -123,7 +123,7 @@ recipeSearchResultsEl.addEventListener('click', function (event) {
 
 // video fetching code
 key = "AIzaSyB7n9rKXwh5RoIn3mnR9i-auGoOMy9NOIU"; // api key for yt
-var searchQuery = selectedRecipe.replaceAll(" ", "%20"); // search query for youtube. will be concatenated to searchResults. if query is multiple words, the words should be separated by pluses
+var searchQuery;
 var searchResults = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=' + searchQuery + '&key=' + key;
 var videoID; // grabs video id to load a video for each recipe
 var recipeURL; // links recipe for video. 
@@ -193,6 +193,8 @@ function showRecipeHistory() {
     var videoList = JSON.parse(localStorage.getItem("videoList"));
 
     if (savedRecipes !== null) {
+        recipeHistoryContainerEl.style.display = "block";
+        
         for (var i = 0; i < savedRecipes.length; i++) {
             var recipe = savedRecipes[i];
             var oldVideo = videoList[i];
@@ -217,11 +219,12 @@ function showRecipeHistory() {
 }
 
 
-// When page loads, load search history (unsure if we want anything else here?)
+// When page loads, load search history and hide all results
 window.onload = function () {
     recipeHistoryContainerEl.style.display = "none";
     recipeSearchResultsEl.style.display = "none";
     youtubeTutorialEl.style.display = "none";
+    rightWrapContainer.style.display = "none";
     showRecipeHistory();
 }
 
