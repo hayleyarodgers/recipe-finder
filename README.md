@@ -1,6 +1,14 @@
 # RECIPE FINDR
 
-# Description
+## Table of Contents
+
+* [Description](#description)
+* [Usage](#usage)
+* [Access](#access)
+* [Credits](#credits)
+* [Authors](#authors)
+
+## Description
 
 Our goal for this collaborative project was to build a real-world front-end application from scratch.
 
@@ -52,3 +60,10 @@ To access the repository where the code I refactored is saved, click [here](http
 - Documentation for [Spoonacular API](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients).
 - Documentation for [YouTube API](https://developers.google.com/youtube/v3/docs/).
 - A [tutorial](https://www.youtube.com/watch?v=FN_ffvw_ksE&t=1018s) we used to help develop our understanding of fetching APIs and rendering data with JavaScript.
+
+## Authors
+
+- [Chris Newbold](https://github.com/ChrisNewbold) - front-end design
+- [Luke Marshall](https://github.com/lukesudom) - functions related to Spoonacular API
+- [Ghassan Al Assadi](https://github.com/ghassanalassadi) - functions related to YouTube API
+- [Hayley Rodgers](https://github.com/hayleyarodgers) - data storage and team lead
