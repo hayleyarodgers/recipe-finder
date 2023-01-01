@@ -53,7 +53,7 @@ To achieve this our group used HTML, CSS and Javascript. In addition, we used se
 
 To access the live application via Github Pages, click [here](https://hayleyarodgers.github.io/recipe-finder/).
 
-To access the repository where the code I refactored is saved, click [here](https://github.com/hayleyarodgers/recipe-finder).
+To access the repository where the code is saved, click [here](https://github.com/hayleyarodgers/recipe-finder).
 
 ## Credits
 
